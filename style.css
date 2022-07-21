@@ -1,65 +1,67 @@
 body {
-    background-color: #222;
-    color:white;
-}
-  
-td, th {
-    color: white;
-    border: 1px solid #dddddd;
-    text-align: center;
-    padding: 8px;
-    width:33%;
+	background-color: #222;
+	color: white;
 }
 
-a:link, a:visited {
-    color: white;
-    text-decoration: none;
+td,
+th {
+	color: white;
+	border: 1px solid #dddddd;
+	text-align: center;
+	padding: 8px;
+	width: 33%;
+}
+
+a:link,
+a:visited {
+	color: white;
+	text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 .menuItem {
-    padding: 0px 20px;
-    text-align: right;
+	padding: 0px 20px;
+	text-align: right;
 }
 
 #top {
-    display: inline-block;
-    width: 100%;
+	display: inline-block;
+	width: 100%;
 }
 
 #revives {
-    padding: 25px;
+	padding: 25px;
 }
 
 #reviveTable {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 80%;
-    margin: auto;
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 80%;
+	margin: auto;
 }
 
 #api {
-    float: left;
-    width: 50%;
+	float: left;
+	width: 50%;
 }
 
 #menu {
-    float:left;
-    width: 50%;
+	float: left;
+	width: 50%;
 }
 
 #factionIDs {
-    width:50%;
+	width: 50%;
 }
 
 #loading {
-    visibility: hidden;
-    text-align: center;
+	visibility: hidden;
+	text-align: center;
 }
 
 #currently {
-    text-align: center;
+	text-align: center;
 }
