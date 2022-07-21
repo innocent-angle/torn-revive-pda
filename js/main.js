@@ -1,13 +1,18 @@
 import StatusHandler from "./status.js";
 
 let toCheck = [];
+let factionIDs = [];
+let timeouts = [];
+let checkNum = 0;
+let facNum = 0;
 
 var table = document.getElementById("reviveTable");
 
 const statusHandler = new StatusHandler();
 
 function getMembers(id, key) {
-	statusHandler.currently(id, "faction");
+	facNum--;
+	statusHandler.currently(id, "faction", facNum);
 
 	const request = `https://api.torn.com/faction/${id}?selections=&key=${key}`;
 	fetch(request)
@@ -20,6 +25,7 @@ function getMembers(id, key) {
 
 					if (element.status.state == "Hospital") {
 						if (element.status.description.startsWith("In hospital")) {
+							checkNum++;
 							toCheck.push(member);
 						}
 					}
@@ -29,7 +35,8 @@ function getMembers(id, key) {
 }
 
 function checkIfRevivable(id, key) {
-	statusHandler.currently(id, "user");
+	checkNum--;
+	statusHandler.currently(id, "user", checkNum);
 
 	const request = `https://api.torn.com/user/${id}?selections=&key=${key}`;
 	fetch(request)
@@ -51,19 +58,26 @@ function checkIfRevivable(id, key) {
 }
 
 function checkAllFactions(key, delay) {
-	const factionIDs = document.getElementById("factionBox").value.split(", ");
-	factionIDs.forEach((id, i) => setTimeout(getMembers, i * delay, id, key));
+	factionIDs = document.getElementById("factionBox").value.split(/[, ]+/);
+	factionIDs.forEach((id, i) => {
+		facNum++;
+		timeouts.push(setTimeout(getMembers, i * delay, id, key));
+	});
 }
 
 function checkAllMembers(key, delay) {
-	setTimeout(() => {
-		console.log(toCheck);
-		toCheck.forEach((id, i) => setTimeout(checkIfRevivable, i * delay, id, key));
-
+	timeouts.push(
 		setTimeout(() => {
-			statusHandler.finished();
-		}, (factionIDs.length + toCheck.length) * delay);
-	}, factionIDs.length * delay);
+			console.log(toCheck);
+			toCheck.forEach((id, i) => timeouts.push(setTimeout(checkIfRevivable, i * delay, id, key)));
+
+			timeouts.push(
+				setTimeout(() => {
+					statusHandler.finished();
+				}, (factionIDs.length + toCheck.length) * delay),
+			);
+		}, factionIDs.length * delay),
+	);
 }
 
 function clear() {
@@ -74,6 +88,9 @@ function clear() {
 function start() {
 	statusHandler.running();
 
+	checkNum = 0;
+	facNum = 0;
+
 	const key = window.localStorage.getItem("apiKey");
 	let delay = window.localStorage.getItem("delay");
 	if (delay === null || delay === 0) delay = 1500;
@@ -81,6 +98,13 @@ function start() {
 	clear();
 	checkAllFactions(key, delay);
 	checkAllMembers(key, delay);
+}
+
+function stop() {
+	timeouts.forEach((element) => {
+		statusHandler.stopped();
+		clearTimeout(element);
+	});
 }
 
 document.getElementById("apiKey").onchange = function () {
@@ -100,6 +124,7 @@ document.getElementById("delayCheckBox").onchange = function () {
 };
 
 document.getElementById("startButton").addEventListener("click", start);
+document.getElementById("stopButton").addEventListener("click", stop);
 document.getElementById("clearButton").addEventListener("click", clear);
 
 if (window.localStorage.getItem("apiKey")) document.getElementById("apiKey").value = window.localStorage.getItem("apiKey");

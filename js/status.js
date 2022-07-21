@@ -5,6 +5,7 @@ export default class StatusHandler {
 		document.getElementById("factionBox").disabled = true;
 		document.getElementById("loading").style.visibility = "visible";
 		document.getElementById("loading").innerHTML = "<h1>⌛ Running!</h1>";
+		document.getElementById("currently").style.display = "initial";
 	}
 
 	stopped() {
@@ -26,18 +27,26 @@ export default class StatusHandler {
 		document.getElementById("apiKey").disabled = false;
 		document.getElementById("factionBox").disabled = false;
 		document.getElementById("loading").innerHTML = "<h1>✔️ Finished</h1>";
-		document.getElementById("currently").style.visibility = "hidden";
+		document.getElementById("currently").style.display = "none";
 	}
 
-	currently(id, type) {
+	stopped() {
+		document.getElementById("startButton").disabled = false;
+		document.getElementById("apiKey").disabled = false;
+		document.getElementById("factionBox").disabled = false;
+		document.getElementById("loading").innerHTML = "<h1>🛑 Stopped</h1>";
+		document.getElementById("currently").style.display = "none";
+	}
+
+	currently(id, type, num) {
 		document.getElementById("currently").style.visibility = "visible";
 		switch (type) {
 			case "faction":
-				document.getElementById("currently").innerHTML = `<h3>🔎 Checking faction ID ${id}!</h1>`;
+				document.getElementById("currently").innerHTML = `<h3>🔎 Checking faction ID ${id} (${num} left)</h1>`;
 				break;
 
 			case "user":
-				document.getElementById("currently").innerHTML = `<h3>🔎 Checking user ID ${id}!</h1>`;
+				document.getElementById("currently").innerHTML = `<h3>🔎 Checking user ID ${id} (${num} left)</h1>`;
 				break;
 
 			default:
