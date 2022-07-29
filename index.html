@@ -10,52 +10,97 @@
 			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 			crossorigin="anonymous"
 		/>
-
-		<link rel="stylesheet" href="/css/style.css" />
+		<link rel="stylesheet" href="./css/style.css" />
 		<title>Torn City Revive PDA</title>
 	</head>
 	<body class="bg-dark text-white">
 		<div id="top" class="container-fluid">
 			<div class="row">
-				<div id="settings" class="col-8">
+				<div id="settings" class="col">
 					<div id="api"><input type="text" id="apiKey" /> Your API Key (<a href="https://www.torn.com/preferences.php#tab=api" target="_blank">Get it here</a>)</div>
 
-					<div id="factionIDs"><input type="text" id="factionBox" /> Faction IDs (Comma separated; <a href="https://nuke.family/contracts" target="_blank">Nuke contracts</a>)</div>
-
-					<div><input type="text" id="delayBox" disabled="true" value="1500" /> Delay (ms) <input type="checkbox" name="test" id="delayCheckBox" /> I know what I'm doing</div>
-
-					<button id="startButton">Start</button>
-					<button id="stopButton">Stop</button>
-					<button id="clearButton">Clear</button>
+					<div><input type="text" id="delayBox" disabled="true" value="1000" /> Delay (ms) <input type="checkbox" name="test" id="delayCheckBox" /> I know what I'm doing</div>
 				</div>
 
-				<div id="menu" class="col-4 d-flex justify-content-end">
-					<nav class="menuItem">
-						<a href="https://github.com/e-fairy/RevivePDA" target="_blank">Github</a> | Made by
-						<a href="https://www.torn.com/profiles.php?XID=2068379" target="_blank">Cute [2068379]</a>
+				<div class="col text-center">
+					<h1>Input Contracts</h1>
+					<form>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-8 text-center">
+									<label id="contractInput" for="name">Faction Name: </label><br />
+									<input type="text" name="name" /><br />
+									<label id="contractInput">FactionID: </label><br />
+									<input type="text" name="id" /><br />
+									<button type="button" id="contractSubmitButton" class="btn btn-md btn-light">Submit</button>
+								</div>
+
+								<div class="col-4 text-left">
+									<input type="checkbox" name="online" checked /> Is online?
+									<br />
+									<input type="checkbox" name="away" checked /> Is away?
+									<br />
+									<input type="checkbox" name="offline" checked /> Is offline?
+									<br />
+									<select name="status">
+										<option value="hospital">Hospital</option>
+										<option value="any">Any</option>
+									</select>
+									<br />
+								</div>
+							</div>
+						</div>
+					</form>
+
+					<div>
+						<table id="contractTable" class="table table-dark table-striped" hidden>
+							<tr>
+								<th>Faction Name</th>
+								<th>Faction ID</th>
+								<th>Options</th>
+								<th>Status</th>
+								<th>Remove</th>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+				<div id="menu" class="col text-right">
+					<nav>
+						<div>Made with 💕 by <a href="https://www.torn.com/profiles.php?XID=2068379" target="_blank"> Cute [2068379]</a></div>
+
+						<div class="d-flex justify-content-end">
+							<a href="https://github.com/e-fairy/RevivePDA" target="_blank">Github</a>
+						</div>
 					</nav>
 				</div>
 			</div>
 		</div>
 
-		<main class="container-fluid">
-			<div class="row">
-				<div class="col text-center text-light">
-					<div id="loading"><h1>💤 Fill in the options and press start</h1></div>
-					<div id="currently"></div>
-
-					<div id="revives">
-						<table id="reviveTable" class="table table-dark table-striped">
-							<tr>
-								<th>Member</th>
-								<th>Faction</th>
-								<th>Status</th>
-							</tr>
-						</table>
-					</div>
+		<div class="container-fluid">
+			<div class="row align-items-center">
+				<div class="col">
+					<main class="container-fluid">
+						<div class="row">
+							<div class="col text-center text-light">
+								<div id="revives">
+									<button id="startButton" class="btn btn-lg btn-light">Start</button>
+									<button id="stopButton" class="btn btn-lg btn-light">Stop</button>
+									<button id="clearButton" class="btn btn-lg btn-light">Clear</button>
+									<table id="reviveTable" class="table table-dark table-striped">
+										<tr class="revive-th">
+											<th class="revive-th">Member</th>
+											<th class="revive-th">Faction</th>
+											<th class="revive-th">Status</th>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+					</main>
 				</div>
 			</div>
-		</main>
+		</div>
 
 		<script
 			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
