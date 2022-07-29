@@ -45,8 +45,8 @@ export function updateContracts(contracts, contractTable) {
 		cell4.appendChild(removeButton);
 	}
 
-	if (contractTable.rows.length > 1) contractTable.hidden = false;
-	if (contractTable.rows.length <= 1) contractTable.hidden = true;
+	// if (contractTable.rows.length > 1) contractTable.hidden = false;
+	// if (contractTable.rows.length <= 1) contractTable.hidden = true;
 }
 
 export function returnContract(form) {
