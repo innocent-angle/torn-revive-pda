@@ -12,12 +12,13 @@ let checkInterval;
 
 const reviveTable = document.getElementById("reviveTable");
 const contractTable = document.getElementById("contractTable");
+const reviveTableInitialHTML = reviveTable.innerHTML;
 
 const statusHandler = new StatusHandler();
 
 function clear() {
 	toCheck = [];
-	reviveTable.innerHTML = "<tr><th>Member</th><th>Faction</th><th>Status</th></tr>";
+	reviveTable.innerHTML = reviveTableInitialHTML;
 }
 
 function start() {

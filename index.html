@@ -5,120 +5,129 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
 			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
 			crossorigin="anonymous"
 		/>
-		<link rel="stylesheet" href="./css/style.css" />
+		<link rel="stylesheet" href="./css/index.css" />
 		<title>Torn City Revive PDA</title>
 	</head>
 	<body class="bg-dark text-white">
-		<div id="top" class="container-fluid">
-			<div class="row">
-				<div id="settings" class="col">
-					<div id="api"><input type="text" id="apiKey" /> Your API Key (<a href="https://www.torn.com/preferences.php#tab=api" target="_blank">Get it here</a>)</div>
-
-					<div><input type="text" id="delayBox" disabled="true" value="1000" /> Delay (ms) <input type="checkbox" name="test" id="delayCheckBox" /> I know what I'm doing</div>
-				</div>
-
-				<div class="col text-center">
-					<h1>Input Contracts</h1>
-					<form>
-						<div class="container-fluid">
-							<div class="row">
-								<div class="col-8 text-center">
-									<label id="contractInput" for="name">Faction Name: </label><br />
-									<input type="text" name="name" /><br />
-									<label id="contractInput">FactionID: </label><br />
-									<input type="text" name="id" /><br />
-									<button type="button" id="contractSubmitButton" class="btn btn-md btn-light">Submit</button>
-								</div>
-
-								<div class="col-4 text-left">
-									<input type="checkbox" name="online" checked /> Is online?
-									<br />
-									<input type="checkbox" name="away" checked /> Is away?
-									<br />
-									<input type="checkbox" name="offline" checked /> Is offline?
-									<br />
-									<select name="status">
-										<option value="hospital">Hospital</option>
-										<option value="any">Any</option>
-									</select>
-									<br />
-								</div>
-							</div>
-						</div>
-					</form>
-
+		<nav class="navbar navbar-dark navbar-expand-lg">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="./">Revive PDA</a>
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="./index.html">Contracts</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="./logs.html">Logs</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="https://github.com/e-fairy/RevivePDA" target="_blank">Github</a>
+						</li>
+					</ul>
 					<div>
-						<table id="contractTable" class="table table-dark table-striped">
-							<tr>
-								<th>Faction Name</th>
-								<th>Faction ID</th>
-								<th>Options</th>
-								<th>Status</th>
-								<th>Remove</th>
-							</tr>
-						</table>
+						<div>Made with 💕 by <a href="https://www.torn.com/profiles.php?XID=2068379" target="_blank"> Cute [2068379]</a></div>
 					</div>
 				</div>
-
-				<div id="menu" class="col text-right">
-					<nav>
-						<div>Made with 💕 by <a href="https://www.torn.com/profiles.php?XID=2068379" target="_blank"> Cute [2068379]</a></div>
-
-						<div class="d-flex justify-content-end">
-							<a href="https://github.com/e-fairy/RevivePDA" target="_blank">Github</a>
-						</div>
-					</nav>
-				</div>
 			</div>
-		</div>
+		</nav>
 
 		<div class="container-fluid">
 			<div class="row align-items-center">
 				<div class="col">
-					<main class="container-fluid">
-						<div class="row">
-							<div class="col text-center text-light">
-								<div id="revives">
-									<button id="startButton" class="btn btn-lg btn-light">Start</button>
-									<button id="stopButton" class="btn btn-lg btn-light">Stop</button>
-									<button id="clearButton" class="btn btn-lg btn-light">Clear</button>
+					<div class="row">
+						<div class="col-xl-4 text-center">
+							<h1>Input Contracts</h1>
+							<form>
+								<div class="container">
+									<div class="row">
+										<div class="col-8 text-center">
+											<label id="contractInput" for="name">Faction Name: </label><br />
+											<input type="text" name="name" /><br />
+											<label id="contractInput">FactionID: </label><br />
+											<input type="text" name="id" /><br />
+											<button type="button" id="contractSubmitButton" class="btn btn-md btn-light">Submit</button>
+										</div>
 
-									<div id="loading"></div>
-									<div id="currently"></div>
-
-									<table id="reviveTable" class="table table-dark table-striped">
-										<tr class="revive-th">
-											<th class="revive-th">Member</th>
-											<th class="revive-th">Faction</th>
-											<th class="revive-th">Status</th>
-										</tr>
-									</table>
+										<div class="col-4 text-left">
+											<input type="checkbox" name="online" checked /> Is online?
+											<br />
+											<input type="checkbox" name="away" checked /> Is away?
+											<br />
+											<input type="checkbox" name="offline" checked /> Is offline?
+											<br />
+											<select name="status">
+												<option value="hospital">Hospital</option>
+												<option value="any">Any</option>
+											</select>
+											<br />
+										</div>
+									</div>
 								</div>
+							</form>
+
+							<div>
+								<table id="contractTable" class="table table-dark table-striped">
+									<tr>
+										<th>Faction Name</th>
+										<th>Faction ID</th>
+										<th>Options</th>
+										<th>Status</th>
+										<th>Remove</th>
+									</tr>
+								</table>
 							</div>
 						</div>
-					</main>
+						<div class="col-xl-8 text-center text-light">
+							<div id="api">
+								<label for="apiKey"> Your API Key (<a href="https://www.torn.com/preferences.php#tab=api" target="_blank">Get it here</a>)</label><br />
+								<input type="text" id="apiKey" name="apiKey" />
+							</div>
+							<div>
+								<label for="delayBox">Delay</label> <input type="checkbox" name="test" id="delayCheckBox" /><br />
+								<input type="text" id="delayBox" name="delayBox" disabled="true" value="1000" />
+							</div>
+
+							<div id="revives">
+								<button id="startButton" class="btn btn-lg btn-light">Start</button>
+								<button id="stopButton" class="btn btn-lg btn-light">Stop</button>
+								<button id="clearButton" class="btn btn-lg btn-light">Clear</button>
+
+								<div id="loading"></div>
+								<div id="currently"></div>
+
+								<table id="reviveTable" class="table table-dark table-striped">
+									<tr class="revive-th">
+										<th class="revive-th">Member</th>
+										<th class="revive-th">Faction</th>
+										<th class="revive-th">Status</th>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 
 		<script
-			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
 			crossorigin="anonymous"
 		></script>
 		<script type="module" src="./js/main.js"></script>
